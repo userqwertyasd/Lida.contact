@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Link</title>
+    <title>Открыть ссылку</title>
     <style>
         body {
             margin: 0;
@@ -21,157 +21,139 @@
         #container {
             max-width: 600px;
             margin: 0 auto;
-        }
-        #image {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
+            padding: 20px;
         }
         h1 {
-            font-size: 3rem;
-            margin: 0;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
         }
         .button-container {
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         button {
-            padding: 1rem 2rem;
+            padding: 15px 30px;
             font-size: 1.2rem;
-            background-color: #4CAF50;
+            background-color: #FE2C55;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
-            margin: 0.5rem;
+            transition: all 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #d12045;
+            transform: scale(1.05);
         }
-        #fakeLoader {
+        #instructions {
             display: none;
-            margin-top: 20px;
+            margin-top: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .loader {
+            display: none;
+            margin: 20px auto;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #FE2C55;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div id="container">
-        <h1>My video 👇</h1>
+        <h1>Мое видео 👇</h1>
+        
         <div class="button-container">
-            <button onclick="openLink()">Open Link</button>
-            <button onclick="copyLink()">Copy Link</button>
+            <button onclick="openLink()">Открыть ссылку</button>
+            <button onclick="copyLink()">Скопировать ссылку</button>
         </div>
-        <div id="fakeLoader">Redirecting, please wait...</div>
+        
+        <div class="loader" id="loader"></div>
+        
+        <div id="instructions">
+            <h3>Не получается открыть автоматически?</h3>
+            <ol>
+                <li>Нажмите "Скопировать ссылку"</li>
+                <li>Откройте Chrome или Safari вручную</li>
+                <li>Вставьте ссылку в адресную строку</li>
+            </ol>
+            <p>Или нажмите на три точки в правом верхнем углу → "Открыть в браузере"</p>
+        </div>
     </div>
 
     <script>
         const targetUrl = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
-        let fallbackTriggered = false;
-
-        const openLink = () => {
+        
+        function openLink() {
             const isTikTok = /tiktok|musical\.ly/i.test(navigator.userAgent);
             const isAndroid = /Android/i.test(navigator.userAgent);
             const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
             
-            // Показываем "загрузку" для пользователя
-            document.getElementById('fakeLoader').style.display = 'block';
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('instructions').style.display = 'none';
             
-            if (isTikTok) {
-                // Для TikTok используем несколько методов обхода
+            // 1. Попытка прямого открытия
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 100);
+            
+            // 2. Попытка через iframe (работает в некоторых случаях)
+            setTimeout(() => {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = targetUrl;
+                document.body.appendChild(iframe);
+            }, 300);
+            
+            // 3. Для Android - попытка через Intent
+            if (isAndroid) {
                 setTimeout(() => {
-                    if (!fallbackTriggered) {
-                        // Метод 1: Попытка открыть через iframe
-                        const iframe = document.createElement('iframe');
-                        iframe.style.display = 'none';
-                        iframe.src = targetUrl;
-                        document.body.appendChild(iframe);
-                        
-                        // Метод 2: Попытка через window.open с задержкой
-                        setTimeout(() => {
-                            if (!fallbackTriggered) {
-                                const newWindow = window.open('', '_blank');
-                                if (newWindow) {
-                                    newWindow.location.href = targetUrl;
-                                } else {
-                                    triggerFallback();
-                                }
-                            }
-                        }, 500);
-                        
-                        // Метод 3: Для Android - intent
-                        if (isAndroid) {
-                            setTimeout(() => {
-                                if (!fallbackTriggered) {
-                                    window.location.href = `intent://${targetUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
-                                }
-                            }, 1000);
-                        }
-                        
-                        // Метод 4: Для iOS - универсальная ссылка
-                        if (isIOS) {
-                            setTimeout(() => {
-                                if (!fallbackTriggered) {
-                                    window.location.href = `googlechrome://${targetUrl.replace(/^https?:\/\//, '')}`;
-                                    setTimeout(() => {
-                                        if (!fallbackTriggered) {
-                                            window.location.href = targetUrl;
-                                        }
-                                    }, 200);
-                                }
-                            }, 1500);
-                        }
-                        
-                        // Если ничего не сработало через 2 секунды
-                        setTimeout(() => {
-                            if (!fallbackTriggered) {
-                                triggerFallback();
-                            }
-                        }, 2000);
-                    }
-                }, 100);
-            } else {
-                // Стандартное открытие для других браузеров
-                if (isAndroid) {
                     window.location.href = `intent://${targetUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
-                } else if (isIOS) {
-                    window.location.href = `googlechrome://${targetUrl.replace(/^https?:\/\//, '')}`;
+                }, 500);
+            }
+            
+            // 4. Для iOS - попытка через универсальные ссылки
+            if (isIOS) {
+                setTimeout(() => {
+                    window.location.href = `googlechromes://${targetUrl.replace(/^https?:\/\//, '')}`;
                     setTimeout(() => {
                         window.location.href = targetUrl;
                     }, 200);
-                } else {
-                    window.location.href = targetUrl;
-                }
+                }, 700);
             }
-        };
-
-        const triggerFallback = () => {
-            fallbackTriggered = true;
-            // Показываем пользователю инструкцию
-            document.getElementById('fakeLoader').innerHTML = `
-                <p>Could not open automatically. Please:</p>
-                <ol>
-                    <li>Copy the link using the "Copy Link" button</li>
-                    <li>Open Chrome or Safari browser manually</li>
-                    <li>Paste and go to the link</li>
-                </ol>
-                <p>Or try opening this page in your external browser.</p>
-            `;
-        };
-
-        const copyLink = () => {
+            
+            // 5. Показать инструкцию, если ничего не сработало
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('instructions').style.display = 'block';
+            }, 2000);
+        }
+        
+        function copyLink() {
             navigator.clipboard.writeText(targetUrl).then(() => {
-                alert('Link copied to clipboard!');
-            }, (err) => {
-                console.error('Failed to copy link: ', err);
+                alert('Ссылка скопирована в буфер обмена!');
+            }).catch(() => {
                 // Fallback для старых браузеров
-                const textarea = document.createElement('textarea');
-                textarea.value = targetUrl;
-                document.body.appendChild(textarea);
-                textarea.select();
+                const input = document.createElement('input');
+                input.value = targetUrl;
+                document.body.appendChild(input);
+                input.select();
                 document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('Link copied to clipboard!');
+                document.body.removeChild(input);
+                alert('Ссылка скопирована!');
             });
-        };
+        }
     </script>
 </body>
 </html>
