@@ -1,133 +1,177 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Redirect</title>
+    <title>Open Link</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7b4397 100%);
-            font-family: Arial, sans-serif;
-            color: white;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .container {
-            height: 100%;
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
-            align-items: center;
+            background: linear-gradient(to right bottom, rgb(26, 32, 44), rgb(74, 29, 150), rgb(91, 33, 182));
+            color: #fff;
+            font-family: Arial, sans-serif;
+            height: 100vh;
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
         }
-        
-        .arrow {
-            position: absolute;
-            font-size: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .arrow-top-right {
-            top: 20px;
-            right: 20px;
+        #image {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
         }
-        
-        .arrow-bottom-left {
-            bottom: 60px;
-            left: 20px;
+        h1 {
+            font-size: 3rem;
+            margin: 0;
         }
-        
-        .arrow-text {
-            margin-top: 10px;
-            font-size: 16px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
+        .button-container {
+            margin-top: 20px;
         }
-        
-        .redirect-button {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: #ff0050;
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 30px;
-            font-size: 18px;
+            border-radius: 5px;
             cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
+            margin: 0.5rem;
         }
-        
-        .redirect-button:hover {
-            background-color: #ff1a6a;
-            transform: scale(1.05);
+        button:hover {
+            background-color: #45a049;
         }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
+        #fakeLoader {
+            display: none;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="arrow arrow-top-right">
-            <div>➡️</div>
-            <div class="arrow-text" id="dots-text">Нажать на 3 точки</div>
+    <div id="container">
+        <h1>My video 👇</h1>
+        <div class="button-container">
+            <button onclick="openLink()">Open Link</button>
+            <button onclick="copyLink()">Copy Link</button>
         </div>
-        
-        <div class="arrow arrow-bottom-left">
-            <div>↙️</div>
-            <div class="arrow-text" id="browser-text">Открыть в браузере</div>
-        </div>
-        
-        <h1 id="title">Откройте страницу в браузере</h1>
-        <a href="https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0" class="redirect-button pulse" id="redirect-button">Перейти на сайт</a>
+        <div id="fakeLoader">Redirecting, please wait...</div>
     </div>
 
     <script>
-        // Определение языка пользователя
-        const userLang = navigator.language || navigator.userLanguage;
-        const isRussian = userLang.startsWith('ru');
-        
-        // Установка текста в зависимости от языка
-        if (!isRussian) {
-            document.getElementById('title').textContent = 'Open the page in your browser';
-            document.getElementById('dots-text').textContent = 'Click on 3 dots';
-            document.getElementById('browser-text').textContent = 'Open in browser';
-            document.getElementById('redirect-button').textContent = 'Go to website';
-        }
-        
-        // Автоматическое перенаправление после 5 секунд (опционально)
-        setTimeout(() => {
-            window.location.href = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
-        }, 10000);
-        
-        // Попытка обойти встроенный браузер TikTok
-        if (navigator.userAgent.includes('TikTok')) {
-            // Показываем кнопку для ручного открытия
-            document.getElementById('redirect-button').style.display = 'block';
+        const targetUrl = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
+        let fallbackTriggered = false;
+
+        const openLink = () => {
+            const isTikTok = /tiktok|musical\.ly/i.test(navigator.userAgent);
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
             
-            // Попытка открыть в другом браузере при клике
-            document.getElementById('redirect-button').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.open(this.href, '_system');
-                return false;
+            // Показываем "загрузку" для пользователя
+            document.getElementById('fakeLoader').style.display = 'block';
+            
+            if (isTikTok) {
+                // Для TikTok используем несколько методов обхода
+                setTimeout(() => {
+                    if (!fallbackTriggered) {
+                        // Метод 1: Попытка открыть через iframe
+                        const iframe = document.createElement('iframe');
+                        iframe.style.display = 'none';
+                        iframe.src = targetUrl;
+                        document.body.appendChild(iframe);
+                        
+                        // Метод 2: Попытка через window.open с задержкой
+                        setTimeout(() => {
+                            if (!fallbackTriggered) {
+                                const newWindow = window.open('', '_blank');
+                                if (newWindow) {
+                                    newWindow.location.href = targetUrl;
+                                } else {
+                                    triggerFallback();
+                                }
+                            }
+                        }, 500);
+                        
+                        // Метод 3: Для Android - intent
+                        if (isAndroid) {
+                            setTimeout(() => {
+                                if (!fallbackTriggered) {
+                                    window.location.href = `intent://${targetUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
+                                }
+                            }, 1000);
+                        }
+                        
+                        // Метод 4: Для iOS - универсальная ссылка
+                        if (isIOS) {
+                            setTimeout(() => {
+                                if (!fallbackTriggered) {
+                                    window.location.href = `googlechrome://${targetUrl.replace(/^https?:\/\//, '')}`;
+                                    setTimeout(() => {
+                                        if (!fallbackTriggered) {
+                                            window.location.href = targetUrl;
+                                        }
+                                    }, 200);
+                                }
+                            }, 1500);
+                        }
+                        
+                        // Если ничего не сработало через 2 секунды
+                        setTimeout(() => {
+                            if (!fallbackTriggered) {
+                                triggerFallback();
+                            }
+                        }, 2000);
+                    }
+                }, 100);
+            } else {
+                // Стандартное открытие для других браузеров
+                if (isAndroid) {
+                    window.location.href = `intent://${targetUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
+                } else if (isIOS) {
+                    window.location.href = `googlechrome://${targetUrl.replace(/^https?:\/\//, '')}`;
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 200);
+                } else {
+                    window.location.href = targetUrl;
+                }
+            }
+        };
+
+        const triggerFallback = () => {
+            fallbackTriggered = true;
+            // Показываем пользователю инструкцию
+            document.getElementById('fakeLoader').innerHTML = `
+                <p>Could not open automatically. Please:</p>
+                <ol>
+                    <li>Copy the link using the "Copy Link" button</li>
+                    <li>Open Chrome or Safari browser manually</li>
+                    <li>Paste and go to the link</li>
+                </ol>
+                <p>Or try opening this page in your external browser.</p>
+            `;
+        };
+
+        const copyLink = () => {
+            navigator.clipboard.writeText(targetUrl).then(() => {
+                alert('Link copied to clipboard!');
+            }, (err) => {
+                console.error('Failed to copy link: ', err);
+                // Fallback для старых браузеров
+                const textarea = document.createElement('textarea');
+                textarea.value = targetUrl;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Link copied to clipboard!');
             });
-        }
+        };
     </script>
 </body>
 </html>
