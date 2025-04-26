@@ -9,7 +9,7 @@
             margin: 0;
             padding: 15px;
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #3a0ca3, #4361ee, #7209b7);
+            background: #4361ee; /* Синий фон */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -18,7 +18,7 @@
             box-sizing: border-box;
         }
         .card {
-            background: rgba(255,255,255,0.9);
+            background: white;
             border-radius: 20px;
             padding: 25px;
             width: 95%;
@@ -27,7 +27,7 @@
             text-align: center;
         }
         h1 {
-            color: #3a0ca3;
+            color: #4361ee;
             margin-top: 0;
             font-size: 24px;
         }
@@ -35,13 +35,11 @@
             display: flex;
             align-items: center;
             margin: 25px 0;
-            position: relative;
         }
         .arrow {
             font-size: 40px;
-            color: #7209b7;
+            color: #4361ee;
             margin-right: 15px;
-            flex-shrink: 0;
         }
         .step-text {
             text-align: left;
@@ -54,7 +52,7 @@
             border-radius: 4px;
         }
         button {
-            background: linear-gradient(45deg, #4361ee, #3a0ca3);
+            background: #4361ee;
             color: white;
             border: none;
             padding: 15px;
@@ -64,12 +62,6 @@
             margin-top: 20px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(58,12,163,0.4);
-        }
-        .note {
-            font-size: 14px;
-            margin-top: 20px;
-            color: #666;
         }
     </style>
 </head>
@@ -92,19 +84,9 @@
             </div>
         </div>
         
-        <div class="step">
-            <div class="arrow">➤</div>
-            <div class="step-text">
-                Перейди на страницу знакомства<br>
-                в твоём браузере
-            </div>
-        </div>
-        
-        <button onclick="window.open('https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0', '_blank')">ОТКРЫТЬ ССЫЛКУ</button>
-        
-        <div class="note">
-            Если не открывается автоматически - нажми кнопку выше
-        </div>
+        <button onclick="window.location.href='https://goo.su/MVT090'">
+            ПЕРЕЙТИ НА СТРАНИЦУ
+        </button>
     </div>
 </body>
 </html>
