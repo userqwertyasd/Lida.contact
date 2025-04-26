@@ -9,7 +9,7 @@
             margin: 0;
             padding: 15px;
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #FF0050, #FF7D00);
+            background: linear-gradient(45deg, #3a0ca3, #4361ee, #7209b7);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,11 +23,11 @@
             padding: 25px;
             width: 95%;
             max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
         }
         h1 {
-            color: #FF0050;
+            color: #3a0ca3;
             margin-top: 0;
             font-size: 24px;
         }
@@ -39,21 +39,22 @@
         }
         .arrow {
             font-size: 40px;
-            color: #FF0050;
+            color: #7209b7;
             margin-right: 15px;
             flex-shrink: 0;
         }
         .step-text {
             text-align: left;
+            color: #333;
         }
         .highlight {
-            background: #FFEB3B;
+            background: #4cc9f0;
             color: #000;
             padding: 2px 5px;
             border-radius: 4px;
         }
         button {
-            background: #FF0050;
+            background: linear-gradient(45deg, #4361ee, #3a0ca3);
             color: white;
             border: none;
             padding: 15px;
@@ -63,6 +64,7 @@
             margin-top: 20px;
             font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(58,12,163,0.4);
         }
         .note {
             font-size: 14px;
@@ -98,29 +100,11 @@
             </div>
         </div>
         
-        <button onclick="copyLink()">СКОПИРОВАТЬ ССЫЛКУ</button>
+        <button onclick="window.open('https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0', '_blank')">ОТКРЫТЬ ССЫЛКУ</button>
         
         <div class="note">
-            Если не открывается автоматически - скопируй ссылку и вставь в браузер
+            Если не открывается автоматически - нажми кнопку выше
         </div>
     </div>
-
-    <script>
-        const targetUrl = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
-        
-        function copyLink() {
-            navigator.clipboard.writeText(targetUrl).then(() => {
-                alert('Ссылка скопирована! Вставь её в браузер 😊');
-            }).catch(() => {
-                const input = document.createElement('input');
-                input.value = targetUrl;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                document.body.removeChild(input);
-                alert('Ссылка скопирована! Открой браузер и вставь её 😉');
-            });
-        }
-    </script>
 </body>
 </html>
