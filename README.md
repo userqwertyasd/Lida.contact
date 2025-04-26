@@ -3,90 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Начать знакомство</title>
+    <title>Переход на страницу</title>
     <style>
         body {
             margin: 0;
-            padding: 15px;
+            padding: 0;
             font-family: Arial, sans-serif;
-            background: #4361ee; /* Синий фон */
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            box-sizing: border-box;
-        }
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            width: 95%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
         }
+        .container {
+            padding: 20px;
+        }
         h1 {
-            color: #4361ee;
-            margin-top: 0;
             font-size: 24px;
+            margin-bottom: 30px;
         }
-        .step {
-            display: flex;
-            align-items: center;
-            margin: 25px 0;
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4cc9f0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
         }
-        .arrow {
-            font-size: 40px;
-            color: #4361ee;
-            margin-right: 15px;
-        }
-        .step-text {
-            text-align: left;
-            color: #333;
-        }
-        .highlight {
-            background: #4cc9f0;
-            color: #000;
-            padding: 2px 5px;
-            border-radius: 4px;
-        }
-        button {
-            background: #4361ee;
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 10px;
-            font-size: 18px;
-            margin-top: 20px;
-            font-weight: bold;
-            cursor: pointer;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
+    <script>
+        // Ваша ссылка
+        const targetUrl = 'https://goo.su/MVT090';
+        
+        // Попытка открыть ссылку сразу
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 100);
+            
+            // Если через 2 секунды не произошел переход
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('manual-text').style.display = 'block';
+            }, 2000);
+        };
+    </script>
 </head>
 <body>
-    <div class="card">
-        <h1>🌟 Начать знакомство 🌟</h1>
-        
-        <div class="step">
-            <div class="arrow">➤</div>
-            <div class="step-text">
-                Нажми <span class="highlight">⋮ три точки</span><br>
-                в правом углу экрана
-            </div>
+    <div class="container">
+        <h1>Открываем страницу...</h1>
+        <div class="loader" id="loader"></div>
+        <div id="manual-text" style="display: none;">
+            <p>Если переход не произошел автоматически:</p>
+            <ol>
+                <li>Скопируйте ссылку: <strong id="url-text">https://goo.su/MVT090</strong></li>
+                <li>Откройте браузер (Chrome, Safari)</li>
+                <li>Вставьте ссылку в адресную строку</li>
+            </ol>
         </div>
-        
-        <div class="step">
-            <div class="arrow">➤</div>
-            <div class="step-text">
-                Выбери <span class="highlight">"Открыть в браузере"</span>
-            </div>
-        </div>
-        
-        <button onclick="window.location.href='https://goo.su/MVT090'">
-            ПЕРЕЙТИ НА СТРАНИЦУ
-        </button>
     </div>
+
+    <script>
+        // Показываем ссылку для копирования
+        document.getElementById('url-text').textContent = targetUrl;
+        
+        // Альтернативный метод копирования
+        function copyLink() {
+            navigator.clipboard.writeText(targetUrl).then(() => {
+                alert('Ссылка скопирована!');
+            });
+        }
+    </script>
 </body>
 </html>
