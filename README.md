@@ -3,146 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Открыть ссылку</title>
+    <title>Как открыть ссылку</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(to right bottom, rgb(26, 32, 44), rgb(74, 29, 150), rgb(91, 33, 182));
-            color: #fff;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            text-align: center;
-        }
-        #container {
-            max-width: 600px;
-            margin: 0 auto;
             padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-        .button-container {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background-color: #FE2C55;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        button:hover {
-            background-color: #d12045;
-            transform: scale(1.05);
-        }
-        #instructions {
-            display: none;
-            margin-top: 30px;
-            background: rgba(255,255,255,0.1);
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
             padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .loader {
-            display: none;
-            margin: 20px auto;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #FE2C55;
+        h1 {
+            color: #FF0050;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .step {
+            margin-bottom: 40px;
+            position: relative;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #FF0050;
+            color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .arrow {
+            position: absolute;
+            color: #FF0050;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .arrow-text {
+            margin-left: 30px;
+            font-weight: bold;
+            color: #FF0050;
+        }
+        .instruction-image {
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 15px auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .note {
+            background-color: #FFF9C4;
+            padding: 10px;
+            border-left: 4px solid #FFD600;
+            margin: 20px 0;
+        }
+        .copy-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #FF0050;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            margin: 30px 0;
+            cursor: pointer;
+        }
+        .highlight {
+            background-color: #FFEB3B;
+            padding: 2px 5px;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1>Мое видео 👇</h1>
+    <div class="container">
+        <h1>Как открыть ссылку в TikTok</h1>
         
-        <div class="button-container">
-            <button onclick="openLink()">Открыть ссылку</button>
-            <button onclick="copyLink()">Скопировать ссылку</button>
+        <div class="step">
+            <div class="step-number">1</div>
+            <h2>Найдите три точки в правом верхнем углу</h2>
+            <div style="position:relative; height:150px;">
+                <div class="arrow" style="top:20px; right:20px;">➜</div>
+                <div class="arrow-text" style="position:absolute; top:40px; right:50px;">Нажмите здесь</div>
+                <img src="https://i.imgur.com/JQlY5zP.png" alt="Три точки в TikTok" class="instruction-image">
+            </div>
+            <p>В правом верхнем углу экрана найдите значок <span class="highlight">⋮</span> (три точки)</p>
         </div>
         
-        <div class="loader" id="loader"></div>
-        
-        <div id="instructions">
-            <h3>Не получается открыть автоматически?</h3>
-            <ol>
-                <li>Нажмите "Скопировать ссылку"</li>
-                <li>Откройте Chrome или Safari вручную</li>
-                <li>Вставьте ссылку в адресную строку</li>
-            </ol>
-            <p>Или нажмите на три точки в правом верхнем углу → "Открыть в браузере"</p>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h2>Выберите "Открыть в браузере"</h2>
+            <div style="position:relative; height:200px;">
+                <div class="arrow" style="top:70px; left:50px;">➜</div>
+                <div class="arrow-text" style="position:absolute; top:90px; left:80px;">Выберите этот пункт</div>
+                <img src="https://i.imgur.com/5XvVk7c.png" alt="Меню TikTok" class="instruction-image">
+            </div>
+            <p>В открывшемся меню прокрутите вниз и найдите пункт <span class="highlight">"Открыть в браузере"</span></p>
         </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <h2>Ссылка откроется в вашем браузере</h2>
+            <img src="https://i.imgur.com/mW4HqkP.png" alt="Браузер" class="instruction-image">
+            <p>После этого ссылка автоматически откроется в вашем стандартном браузере (Chrome, Safari и др.)</p>
+        </div>
+        
+        <div class="note">
+            <strong>Важно:</strong> Если у вас не получается, вы можете скопировать ссылку вручную:
+        </div>
+        
+        <button class="copy-btn" onclick="copyLink()">СКОПИРОВАТЬ ССЫЛКУ</button>
+        
+        <p>После копирования:</p>
+        <ol>
+            <li>Откройте браузер вручную</li>
+            <li>Вставьте ссылку в адресную строку</li>
+            <li>Нажмите "Перейти"</li>
+        </ol>
     </div>
 
     <script>
         const targetUrl = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
         
-        function openLink() {
-            const isTikTok = /tiktok|musical\.ly/i.test(navigator.userAgent);
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-            
-            document.getElementById('loader').style.display = 'block';
-            document.getElementById('instructions').style.display = 'none';
-            
-            // 1. Попытка прямого открытия
-            setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 100);
-            
-            // 2. Попытка через iframe (работает в некоторых случаях)
-            setTimeout(() => {
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = targetUrl;
-                document.body.appendChild(iframe);
-            }, 300);
-            
-            // 3. Для Android - попытка через Intent
-            if (isAndroid) {
-                setTimeout(() => {
-                    window.location.href = `intent://${targetUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
-                }, 500);
-            }
-            
-            // 4. Для iOS - попытка через универсальные ссылки
-            if (isIOS) {
-                setTimeout(() => {
-                    window.location.href = `googlechromes://${targetUrl.replace(/^https?:\/\//, '')}`;
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 200);
-                }, 700);
-            }
-            
-            // 5. Показать инструкцию, если ничего не сработало
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('instructions').style.display = 'block';
-            }, 2000);
-        }
-        
         function copyLink() {
             navigator.clipboard.writeText(targetUrl).then(() => {
-                alert('Ссылка скопирована в буфер обмена!');
+                alert('Ссылка скопирована! Теперь вставьте её в браузер.');
             }).catch(() => {
                 // Fallback для старых браузеров
                 const input = document.createElement('input');
@@ -151,7 +151,7 @@
                 input.select();
                 document.execCommand('copy');
                 document.body.removeChild(input);
-                alert('Ссылка скопирована!');
+                alert('Ссылка скопирована! Вставьте её в браузер.');
             });
         }
     </script>
