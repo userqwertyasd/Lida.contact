@@ -3,111 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Как открыть ссылку</title>
+    <title>Начать знакомство</title>
     <style>
         body {
             margin: 0;
             padding: 15px;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ff4d4d, #f9cb28);
+            background: linear-gradient(45deg, #FF0050, #FF7D00);
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
             box-sizing: border-box;
         }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            max-width: 100%;
+        .card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            padding: 25px;
+            width: 95%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
         }
         h1 {
-            color: #ff2d55;
-            text-align: center;
+            color: #FF0050;
             margin-top: 0;
-            font-size: 22px;
+            font-size: 24px;
         }
         .step {
-            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
             position: relative;
         }
         .arrow {
             font-size: 40px;
-            color: #ff2d55;
-            position: absolute;
+            color: #FF0050;
+            margin-right: 15px;
+            flex-shrink: 0;
         }
-        .step-content {
-            margin-left: 50px;
+        .step-text {
+            text-align: left;
         }
         .highlight {
-            background: #fff200;
+            background: #FFEB3B;
+            color: #000;
             padding: 2px 5px;
-            border-radius: 3px;
-        }
-        .reason {
-            background: #ffebee;
-            padding: 12px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 4px solid #ff2d55;
+            border-radius: 4px;
         }
         button {
-            background: #ff2d55;
+            background: #FF0050;
             color: white;
             border: none;
-            padding: 12px;
+            padding: 15px;
             width: 100%;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-top: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin-top: 20px;
             font-weight: bold;
+            cursor: pointer;
         }
-        .emoji {
-            font-size: 24px;
+        .note {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><span class="emoji">🔗</span> Как открыть ссылку в TikTok</h1>
-        
-        <div class="reason">
-            <strong>Почему не открывается?</strong><br>
-            TikTok блокирует переходы на внешние сайты. Нужно открыть через браузер!
-        </div>
+    <div class="card">
+        <h1>🌟 Начать знакомство 🌟</h1>
         
         <div class="step">
             <div class="arrow">➤</div>
-            <div class="step-content">
-                <strong>1. Нажмите <span class="highlight">⋮</span> (три точки)</strong><br>
-                В правом верхнем углу экрана
+            <div class="step-text">
+                Нажми <span class="highlight">⋮ три точки</span><br>
+                в правом углу экрана
             </div>
         </div>
         
         <div class="step">
             <div class="arrow">➤</div>
-            <div class="step-content">
-                <strong>2. Выберите <span class="highlight">"Открыть в браузере"</span></strong><br>
-                В появившемся меню
+            <div class="step-text">
+                Выбери <span class="highlight">"Открыть в браузере"</span>
             </div>
         </div>
         
         <div class="step">
             <div class="arrow">➤</div>
-            <div class="step-content">
-                <strong>3. Сайт откроется автоматически</strong><br>
-                В вашем Chrome, Safari или другом браузере
+            <div class="step-text">
+                Перейди на страницу знакомства<br>
+                в твоём браузере
             </div>
         </div>
         
         <button onclick="copyLink()">СКОПИРОВАТЬ ССЫЛКУ</button>
+        
+        <div class="note">
+            Если не открывается автоматически - скопируй ссылку и вставь в браузер
+        </div>
     </div>
 
     <script>
-        const targetUrl = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
+        const targetUrl = 'https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0';
         
         function copyLink() {
             navigator.clipboard.writeText(targetUrl).then(() => {
-                alert('Ссылка скопирована! Вставьте её в браузер.');
+                alert('Ссылка скопирована! Вставь её в браузер 😊');
             }).catch(() => {
                 const input = document.createElement('input');
                 input.value = targetUrl;
@@ -115,7 +118,7 @@
                 input.select();
                 document.execCommand('copy');
                 document.body.removeChild(input);
-                alert('Ссылка скопирована! Откройте браузер и вставьте её.');
+                alert('Ссылка скопирована! Открой браузер и вставь её 😉');
             });
         }
     </script>
