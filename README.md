@@ -58,6 +58,10 @@
             cursor: pointer;
             font-weight: bold;
         }
+        .instruction {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -65,8 +69,9 @@
         <h1>Открываем страницу...</h1>
         <div class="loader" id="loader"></div>
         <div id="manual-text">
-            <p>Если переход не произошел:</p>
+            <p>Если переход не произошел автоматически:</p>
             <p>Скопируйте ссылку: <br><strong id="url-text"></strong></p>
+            <p class="instruction">Нажмите кнопку "СКОПИРОВАТЬ ССЫЛКУ", затем вставьте ссылку вручную в адресную строку браузера.</p>
             <button onclick="copyLink()">СКОПИРОВАТЬ ССЫЛКУ</button>
         </div>
     </div>
@@ -78,21 +83,21 @@
         // Показываем ссылку для копирования
         document.getElementById('url-text').textContent = targetUrl;
         
-        // 1. Пытаемся открыть ссылку сразу
+        // 1. Пытаемся открыть ссылку через 3 секунды
         setTimeout(() => {
             window.location.href = targetUrl;
-        }, 100);
+        }, 3000);  // 3000 мс = 3 секунды
         
-        // 2. Если через 2 секунды не сработало, показываем инструкцию
+        // 2. Если через 5 секунд не сработало, показываем инструкцию
         setTimeout(() => {
             document.getElementById('loader').style.display = 'none';
             document.getElementById('manual-text').style.display = 'block';
-        }, 2000);
+        }, 5000);  // Проверяем через 5 секунд
         
         // Функция копирования
         function copyLink() {
             navigator.clipboard.writeText(targetUrl)
-                .then(() => alert('Ссылка скопирована! Вставьте ее в браузер.'))
+                .then(() => alert('Ссылка скопирована! Вставьте её в адресную строку браузера.'))
                 .catch(() => {
                     // Fallback для старых устройств
                     const input = document.createElement('input');
@@ -101,7 +106,7 @@
                     input.select();
                     document.execCommand('copy');
                     document.body.removeChild(input);
-                    alert('Ссылка скопирована!');
+                    alert('Ссылка скопирована! Вставьте её в адресную строку браузера.');
                 });
         }
     </script>
