@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="2;url=https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0">
     <title>Перенаправление</title>
     <style>
         body {
@@ -39,18 +40,24 @@
             100% { transform: rotate(360deg); }
         }
     </style>
+    <script>
+        // Двойное перенаправление для обхода ограничений
+        setTimeout(function() {
+            window.location.replace("https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0");
+        }, 2000);
+        
+        // Для старых браузеров
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "https://sites.google.com/view/natasha-contact/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0";
+            }, 2000);
+        };
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Идёт перенаправление...</h1>
         <div class="loader"></div>
     </div>
-
-    <script>
-        // Таймер перенаправления (2000 мс = 2 секунды)
-        setTimeout(function() {
-            window.location.href = "https://prev.affomelody.com/click?pid=113214&offer_id=25";
-        }, 2000);
-    </script>
 </body>
 </html>
